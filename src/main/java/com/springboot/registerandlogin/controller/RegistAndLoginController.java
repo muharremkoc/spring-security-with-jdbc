@@ -33,7 +33,7 @@ public class RegistAndLoginController {
             userService.saveUser(user);
 
         }
-        return "index";
+        return "menu";
     }
 
 
@@ -41,22 +41,29 @@ public class RegistAndLoginController {
     public String index(){
         return "index";
     }
-
+    @RequestMapping("/menu")
+    public String menu(){
+        return "menu";
+    }
 
     @PostMapping(value = "/login")
     public String login(@ModelAttribute("user") @RequestBody User user,BindingResult result, Model model) {
         model.addAttribute("user", user);
         if (result.hasErrors()) {
-            return "logout";
+            return "login";
 
         }
 
-      return "login";
+      return "logout";
     }
 
 
     @GetMapping(value="/login")
     public String getLogin(){
         return "login";
+    }
+    @GetMapping(value="/logout")
+    public String getLogout(){
+        return "index";
     }
 }
